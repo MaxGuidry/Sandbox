@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     void SimulateWater(Transform t)
     {
 
-        this.transform.position = new Vector3(this.transform.position.x, t.position.y + (this.transform.localScale.y / 2f - 1f), this.transform.position.z);
+        this.transform.position = new Vector3(rb.position.x, t.position.y + (this.transform.localScale.y / 2f - 1f), rb.position.z);
 
     }
     bool Attack()
@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
+        anim.SetTrigger("Jump");
         rb.AddForce(Vector3.up * JumpHeight, ForceMode.Impulse);
     }
 }
