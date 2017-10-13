@@ -16,9 +16,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public static bool InBoat;
     private Transform mine;
+
+    public Player player;
     // Use this for initialization
     void Start()
     {
+        player = ScriptableObject.CreateInstance<Player>();
+        player.health = 10;
+        player.damage = 10;
         rb = GetComponent<Rigidbody>();
         position = this.transform.position;
         anim = GetComponent<Animator>();
@@ -75,18 +80,22 @@ public class PlayerController : MonoBehaviour
             position += velocity * Time.deltaTime;
             anim.SetFloat("velocity", velocity.magnitude);
             this.transform.position = position;
+            Quaternion q = this.transform.rotation;
+
             this.transform.LookAt(this.transform.position + velocity);
+            this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
             if (Input.GetKeyDown(GameSettings.Jump))
                 Jump();
             if (Input.GetKeyDown(GameSettings.Attack))
                 Attack();
         }
-
         else
         {
             this.transform.position = mine.position;
             this.transform.rotation = mine.transform.rotation;
         }
+        
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -119,10 +128,26 @@ public class PlayerController : MonoBehaviour
         if (Vector3.Dot(rb.velocity.normalized, new Vector3(0, -1, 0)) > .3f)
             this.transform.position = new Vector3(position.x, t.position.y, position.z);
     }
-    bool Attack()
+    void Attack()
     {
         anim.SetTrigger("attack");
-        return false;
+       
+    }
+
+    public void TryToHit()
+    {
+        RaycastHit hit;
+        Physics.Raycast(new Ray(this.transform.position + new Vector3(0, 1, 0), this.transform.forward), out hit, 10);
+
+        if (hit.transform == null)
+            return;
+        EnemyController ec = hit.transform.gameObject.GetComponent<EnemyController>();
+        if (ec != null)
+        {
+            
+            player.DoDamage(ec.enemy);
+            ec.GetHit();
+        }
     }
     void Jump()
     {
@@ -130,5 +155,6 @@ public class PlayerController : MonoBehaviour
         //anim.speed = 5f/JumpHeight;
         rb.AddForce(Vector3.up * JumpHeight, ForceMode.Impulse);
     }
+    
 }
 //+ (this.transform.localScale.y / 2f - 1f) + position.y
