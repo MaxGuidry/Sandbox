@@ -8,7 +8,7 @@ public class GameSettings : MonoBehaviour
     // Use this for initialization
     public static KeyCode Attack = KeyCode.Mouse0;
     public static KeyCode Jump = KeyCode.Space;
-
+    public static KeyCode Interact = KeyCode.F;
     void Start()
     {
 

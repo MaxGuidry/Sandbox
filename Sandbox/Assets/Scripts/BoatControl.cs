@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoatControl : MonoBehaviour
+public class BoatControl : MonoBehaviour, IInteractable
 {
     public int Speed = 1;
     
@@ -12,7 +12,8 @@ public class BoatControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Name = "Boat";
+        WhatDo = "Get In";
         rb = this.GetComponent<Rigidbody>();
     }
 
@@ -73,5 +74,8 @@ public class BoatControl : MonoBehaviour
     {
         this.transform.position = new Vector3(this.transform.position.x, t.position.y + .5f + (this.transform.localScale.y / 2f - .2f), this.transform.position.z);
     }
+
+    public string Name { get; set; }
+    public string WhatDo { get; set; }
 }
 // + t.gameObject.GetComponent<BoxCollider>().center.y
