@@ -43,14 +43,14 @@ AnimationClip:
       - serializedVersion: 2
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0.6666667
+        outSlope: 0.6666667
         tangentMode: 34
       - serializedVersion: 2
-        time: 5
+        time: 7.5
         value: 5
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0.6666667
+        outSlope: 0.6666667
         tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -80,7 +80,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 5
+    m_StopTime: 7.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -102,14 +102,14 @@ AnimationClip:
       - serializedVersion: 2
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0.6666667
+        outSlope: 0.6666667
         tangentMode: 34
       - serializedVersion: 2
-        time: 5
+        time: 7.5
         value: 5
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0.6666667
+        outSlope: 0.6666667
         tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Muted: 0
   m_Soloed: 0
   m_Height: 0
+  m_InlineAnimationCurveHeight: 100
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
@@ -158,6 +159,7 @@ MonoBehaviour:
   m_Muted: 0
   m_Soloed: 0
   m_Height: 0
+  m_InlineAnimationCurveHeight: 100
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
@@ -178,6 +180,7 @@ MonoBehaviour:
   m_Muted: 0
   m_Soloed: 0
   m_Height: 0
+  m_InlineAnimationCurveHeight: 100
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 74144056785667428}
   m_Parent: {fileID: 11400000}
@@ -207,6 +210,7 @@ MonoBehaviour:
   m_Muted: 0
   m_Soloed: 0
   m_Height: 0
+  m_InlineAnimationCurveHeight: 100
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
