@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(GameSettings.Interact))
         {
             if (InBoat)
             {

@@ -1,17 +1,44 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.UI;
+
 public class GameSettings : MonoBehaviour
 {
     Event e;
     // Use this for initialization
-    public static KeyCode Attack = KeyCode.Mouse0;
-    public static KeyCode Jump = KeyCode.Space;
-    public static KeyCode Interact = KeyCode.F;
+    public static KeyCode Attack { get; set; }
+    public static KeyCode Jump { get; set; }
+    public static KeyCode Interact { get; set; }
+    public Canvas menu;
+    public GameObject ButtonPrefab;
+
     void Start()
     {
-
+        Attack = KeyCode.Mouse0;
+        Jump = KeyCode.Space;
+        Interact = KeyCode.F;
+        PropertyInfo[] settingsprops = typeof(GameSettings).GetProperties();
+        
+        int i = 5;
+        foreach (var settingsprop in settingsprops)
+        {
+            if (settingsprop.PropertyType == typeof(KeyCode))
+            {
+                GameObject g = Instantiate(ButtonPrefab);
+                g.transform.parent = menu.gameObject.transform;
+                g.transform.position = Vector3.zero;
+                RectTransform rt = g.GetComponent<RectTransform>();
+               rt.position =
+                    new Vector3(0, i * rt.sizeDelta.y, 0);
+                
+                i--;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -19,36 +46,50 @@ public class GameSettings : MonoBehaviour
     {
 
 
-        if (Input.GetKeyDown(KeyCode.F1))
-            SaveSettings();
+
+    }
+
+    void OnDisable()
+    {
+        SaveSettings();
     }
     private void OnGUI()
     {
         e = Event.current;
     }
+    [Serializable]
     class SavableSettings
     {
-        public KeyCode Attack;
-        public KeyCode Jump;
+        public KeyCode sAttack;
+        public KeyCode sJump;
+        public KeyCode sInteract;
     }
 
     void SaveSettings()
     {
 
         SavableSettings sets = new SavableSettings();
-        sets.Attack = Attack;
-        sets.Jump = Jump;
-        var json = JsonUtility.ToJson(sets, true);
-        
+        List<FieldInfo> savableprops = typeof(SavableSettings).GetFields().ToList();
+        PropertyInfo[] settingsprops = typeof(GameSettings).GetProperties();
+        int i = 0;
+        //sets,settingsprops[i].GetValue(this,null),null
+        foreach (var propertyInfo in savableprops)
+        {
+            propertyInfo.SetValue(sets, settingsprops[i].GetValue(this, null));
+            i++;
+        }
+
+        string json = JsonUtility.ToJson(sets, true);
+
 
         string path = Application.persistentDataPath;
         path = Application.dataPath;
-        
+
         if (!File.Exists(path))
         {
             Directory.CreateDirectory(path);
         }
-        File.WriteAllText(path  + "/bin/settings" + ".json", json);
+        File.WriteAllText(path + "/bin/settings" + ".json", json);
     }
     public void AttackKey()
     {
@@ -82,11 +123,11 @@ public class GameSettings : MonoBehaviour
             }
             yield return null;
         }
-        
-       
+
+
 
     }
-   KeyCode WhatMouseButton(int i)
+    KeyCode WhatMouseButton(int i)
     {
         switch (i)
         {

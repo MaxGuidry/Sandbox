@@ -1,4 +1,5 @@
 {
-    "Attack": 323,
-    "Jump": 32
+    "sAttack": 323,
+    "sJump": 32,
+    "sInteract": 102
 }

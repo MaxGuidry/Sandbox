@@ -1479,6 +1479,16 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 54351702279582768, guid: 200f9678d95aac24ca63d58b20de1abb,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54351702279582768, guid: 200f9678d95aac24ca63d58b20de1abb,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 200f9678d95aac24ca63d58b20de1abb, type: 2}
   m_IsPrefabParent: 0
