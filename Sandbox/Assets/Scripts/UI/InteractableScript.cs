@@ -28,7 +28,7 @@ namespace Assets.Scripts.UI
                 IInteractable iact = hit.transform.gameObject.GetComponent<IInteractable>();
                 if (iact != null)
                 {
-                    text.text = "Press " + GameSettings.Interact.ToString() + " to " + iact.WhatDo + " " + iact.Name;
+                    text.text = "Press " + InputMap.KeyBinds["Interact"].ToString() + " to " + iact.WhatDo + " " + iact.Name;
                     text.gameObject.SetActive(true);
 
                 }

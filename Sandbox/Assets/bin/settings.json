@@ -1,5 +1,9 @@
 {
     "sAttack": 323,
     "sJump": 32,
-    "sInteract": 102
+    "sInteract": 102,
+    "sMoveForward": 259,
+    "sMoveLeft": 97,
+    "sMoveRight": 100,
+    "sMoveBack": 115
 }

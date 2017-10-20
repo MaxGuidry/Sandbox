@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(GameSettings.Interact))
+        if (Input.GetKeyDown(InputMap.KeyBinds["Interact"]))
         {
             if (InBoat)
             {
@@ -84,9 +84,9 @@ public class PlayerController : MonoBehaviour
 
             this.transform.LookAt(this.transform.position + velocity);
             this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
-            if (Input.GetKeyDown(GameSettings.Jump))
+            if (Input.GetKeyDown(InputMap.KeyBinds["Jump"]))
                 Jump();
-            if (Input.GetKeyDown(GameSettings.Attack))
+            if (Input.GetKeyDown(InputMap.KeyBinds["Attack"]))
                 Attack();
         }
         else
