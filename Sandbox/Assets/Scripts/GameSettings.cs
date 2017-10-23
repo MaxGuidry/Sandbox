@@ -27,29 +27,50 @@ public class GameSettings : MonoBehaviour
         //InputMap.MoveLeft = KeyCode.A;
         //InputMap.MoveBack = KeyCode.S;
         //InputMap.MoveRight = KeyCode.D;
-        PropertyInfo[] settingsprops = typeof(InputMap).GetProperties();
-
-        int i = 5;
-        foreach (var settingsprop in settingsprops)
+        int j = 0;
+        int k = 5;
+        foreach (var keyCode in KeyOptions.keysList)
         {
-            if (settingsprop.PropertyType == typeof(KeyCode))
-            {
-                GameObject g = Instantiate(ButtonPrefab);
-                g.transform.SetParent(menu.gameObject.transform);
-                g.transform.position = g.transform.parent.position;
-                RectTransform rt = g.GetComponent<RectTransform>();
-                rt.position =
-                    new Vector3(370, 208 + i * rt.sizeDelta.y, 0);
-                object o = settingsprop.GetValue(settingsprops, null);
-                string s = o.ToString();
-                g.gameObject.GetComponentInChildren<Text>().text = settingsprop.Name + ": " + s;
-                g.gameObject.AddComponent<DisableWhenClicked>();
-                g.gameObject.GetComponent<Button>().onClick.AddListener(StartWait);
-                g.gameObject.GetComponent<Button>().onClick.AddListener(g.GetComponent<DisableWhenClicked>().disable);
-                buttons.Add(g);
-                i--;
-            }
+            GameObject g = Instantiate(ButtonPrefab);
+            g.transform.SetParent(menu.gameObject.transform);
+            g.transform.position = g.transform.parent.position;
+            RectTransform rt = g.GetComponent<RectTransform>();
+            rt.position =
+                new Vector3(370, 208 + k * rt.sizeDelta.y, 0);
+           /// object o = settingsprop.GetValue(settingsprops, null);
+           // string s = o.ToString();
+            g.gameObject.GetComponentInChildren<Text>().text = KeyOptions.optionsList[j] + ": " + keyCode;
+            g.gameObject.AddComponent<DisableWhenClicked>();
+            g.gameObject.GetComponent<Button>().onClick.AddListener(StartWait);
+            g.gameObject.GetComponent<Button>().onClick.AddListener(g.GetComponent<DisableWhenClicked>().disable);
+            buttons.Add(g);
+            j++;
+            k--;
         }
+
+        //PropertyInfo[] settingsprops = typeof(InputMap).GetProperties();
+
+        //int i = 5;
+        //foreach (var settingsprop in settingsprops)
+        //{
+        //    if (settingsprop.PropertyType == typeof(KeyCode))
+        //    {
+        //        GameObject g = Instantiate(ButtonPrefab);
+        //        g.transform.SetParent(menu.gameObject.transform);
+        //        g.transform.position = g.transform.parent.position;
+        //        RectTransform rt = g.GetComponent<RectTransform>();
+        //        rt.position =
+        //            new Vector3(370, 208 + i * rt.sizeDelta.y, 0);
+        //        object o = settingsprop.GetValue(settingsprops, null);
+        //        string s = o.ToString();
+        //        g.gameObject.GetComponentInChildren<Text>().text = settingsprop.Name + ": " + s;
+        //        g.gameObject.AddComponent<DisableWhenClicked>();
+        //        g.gameObject.GetComponent<Button>().onClick.AddListener(StartWait);
+        //        g.gameObject.GetComponent<Button>().onClick.AddListener(g.GetComponent<DisableWhenClicked>().disable);
+        //        buttons.Add(g);
+        //        i--;
+        //    }
+        //}
     }
 
     // Update is called once per frame
@@ -93,7 +114,8 @@ public class GameSettings : MonoBehaviour
             if (e.isKey)
             {
                 key = true;
-                code = InputMap.WhatKeyCode(e.character);
+                string str = e.character.ToString();
+                code = InputMap.WhatKeyCode(str);
                 if (code == KeyCode.None)
                     code = InputMap.SpecialKey();
                 break;

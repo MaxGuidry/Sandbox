@@ -85,8 +85,45 @@ public static class InputMap
         }
         return KeyCode.None;
     }
-    public static KeyCode WhatKeyCode(char c)
+    public static KeyCode WhatKeyCode(string s)
     {
+        if (s.Length > 1)
+        {
+            switch (s)
+            {
+                case "f1":
+                    return KeyCode.F1;
+                case "f2":
+                    return KeyCode.F2;
+                case "f3":
+                    return KeyCode.F3;
+                case "f4":
+                    return KeyCode.F4;
+                case "f5":
+                    return KeyCode.F5;
+                case "f6":
+                    return KeyCode.F6;
+                case "f7":
+                    return KeyCode.F7;
+                case "f8":
+                    return KeyCode.F8;
+                case "f9":
+                    return KeyCode.F9;
+                case "f10":
+                    return KeyCode.F10;
+                case "f11":
+                    return KeyCode.F11;
+                case "f12":
+                    return KeyCode.F12;
+                case "mouse0":
+                    return KeyCode.Mouse0;
+                case "mouse1":
+                    return KeyCode.Mouse1;
+                case "mouse2":
+                    return KeyCode.Mouse2;
+            }
+        }
+        char c = s[0];
         switch (c)
         {
             case 'a':
@@ -161,7 +198,9 @@ public static class InputMap
                 return KeyCode.Alpha8;
             case '9':
                 return KeyCode.Alpha9;
-
+            case ' ':
+                return KeyCode.Space;
+            
         }
         return KeyCode.None;
 
