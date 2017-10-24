@@ -8,6 +8,8 @@ using UnityEngine;
 public class GameKeys : ScriptableObject
 {
     public List<string> optionsList;
+    public List<KeyCode> keysList;
+
     [CustomEditor(typeof(GameKeys))]
     public class GameKeysEditor : Editor
     {
@@ -145,5 +147,5 @@ public class GameKeys : ScriptableObject
     //    NUM0
 
     //}
-    public List<KeyCode> keysList;
+    
 }

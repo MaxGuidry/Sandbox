@@ -1,0 +1,22 @@
+{
+    "keys": [
+        "Attack",
+        "Jump",
+        "Forward",
+        "Left",
+        "Right",
+        "Backward",
+        "Block",
+        "Sprint"
+    ],
+    "values": [
+        119,
+        32,
+        119,
+        97,
+        115,
+        100,
+        324,
+        308
+    ]
+}

@@ -13,10 +13,10 @@ public class GameSettings : MonoBehaviour
     // Use this for initialization
     public Canvas menu;
     public GameObject ButtonPrefab;
-    private List<GameObject> buttons;
+   
     //private string pressed;
     [SerializeField] GameKeys KeyOptions;
-
+    private List<GameObject> buttons;
     void Start()
     {
         buttons = new List<GameObject>();
@@ -37,7 +37,7 @@ public class GameSettings : MonoBehaviour
             RectTransform rt = g.GetComponent<RectTransform>();
             rt.position =
                 new Vector3(370, 208 + k * rt.sizeDelta.y, 0);
-           /// object o = settingsprop.GetValue(settingsprops, null);
+           // object o = settingsprop.GetValue(settingsprops, null);
            // string s = o.ToString();
             g.gameObject.GetComponentInChildren<Text>().text = KeyOptions.optionsList[j] + ": " + keyCode;
             g.gameObject.AddComponent<DisableWhenClicked>();

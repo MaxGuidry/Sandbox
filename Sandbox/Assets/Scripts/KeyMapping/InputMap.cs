@@ -27,7 +27,16 @@ public static class InputMap
     //public static KeyCode MoveLeft { get; set; }
     //public static KeyCode MoveRight { get; set; }
     //public static KeyCode MoveBack { get; set; }
-    public static Dictionary<string, KeyCode> KeyBinds;
+    public static Dictionary<string, KeyCode> KeyBinds = new Dictionary<string, KeyCode>();
+
+    [Serializable]
+    class SaveKeys
+    {
+        //public Dictionary<string, KeyCode> binds = new Dictionary<string, KeyCode>();
+        public List<string> keys = new List<string>();
+        public List<KeyCode> values = new List<KeyCode>();
+    }
+
     public static void SaveSettings()
     {
 
@@ -41,10 +50,14 @@ public static class InputMap
         //    propertyInfo.SetValue(sets, settingsprops[i].GetValue(null, null));
         //    i++;
         //}
-        // List<string> keys = new List<string>(KeyBinds.Keys);
-        // List<KeyCode> keyCodes = new List<KeyCode>(KeyBinds.Values);
 
-        string Json = JsonUtility.ToJson(KeyBinds, true);
+        SaveKeys save = new SaveKeys();
+        save.keys = new List<string>(KeyBinds.Keys);
+        save.values = new List<KeyCode>(KeyBinds.Values);
+        //Dictionary<string, KeyCode> Kb = new Dictionary<string, KeyCode>(KeyBinds);
+
+        //save.binds = KeyBinds;
+        string Json = JsonUtility.ToJson(save, true);
         //string codesJson = JsonUtility.ToJson(keyCodes, true);
 
 
@@ -67,10 +80,16 @@ public static class InputMap
         // string keysJson = File.ReadAllText(Application.dataPath + "/bin/keysettings.json");
         // keys = JsonUtility.FromJson< List<string>>(keysJson);
         string Json = File.ReadAllText(Application.dataPath + "/bin/settings.json");
-        KeyBinds = JsonUtility.FromJson<Dictionary<string, KeyCode>>(Json);
-       
-       
-
+        //KeyBinds = JsonUtility.FromJson<Dictionary<string, KeyCode>>(Json);
+        SaveKeys saved = JsonUtility.FromJson<SaveKeys>(Json);
+        int i = 0;
+        KeyBinds.Clear();
+        foreach (var key in saved.keys)
+        {
+            KeyBinds.Add(key,saved.values[i]);
+            i++;
+        }
+        Debug.Log(KeyBinds.Count);
     }
     public static KeyCode WhatMouseButton(int i)
     {
@@ -123,6 +142,8 @@ public static class InputMap
                     return KeyCode.Mouse2;
             }
         }
+        if (s == "")
+            return KeyCode.None;
         char c = s[0];
         switch (c)
         {
@@ -200,7 +221,7 @@ public static class InputMap
                 return KeyCode.Alpha9;
             case ' ':
                 return KeyCode.Space;
-            
+
         }
         return KeyCode.None;
 
