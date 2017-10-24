@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 889b53e20add38a44b97c1d19d0e2265, type: 3}
-  m_Name: GameKeys
+  m_Name: Default
   m_EditorClassIdentifier: 
   optionsList:
   - Attack
@@ -20,4 +20,4 @@ MonoBehaviour:
   - Backward
   - Block
   - Sprint
-  keysList: 430100002000000077000000610000007300000064000000440100003e000000
+  keysList: 4301000020000000770000006100000073000000640000004401000030010000
