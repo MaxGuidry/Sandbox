@@ -42,7 +42,7 @@ public class KeyMapButtons : MonoBehaviour
         //InputMap.MoveRight = KeyCode.D;
         int j = 0;
         int k = 5;
-        foreach (var keyCode in KeyOptions.keysList)
+        foreach (var keyCode in InputMap.KeyBinds.Values)
         {
             GameObject g = Instantiate(ButtonPrefab);
             g.transform.SetParent(menu.gameObject.transform);
@@ -52,7 +52,11 @@ public class KeyMapButtons : MonoBehaviour
                 new Vector3(370, 208 + k * rt.sizeDelta.y, 0);
             // object o = settingsprop.GetValue(settingsprops, null);
             // string s = o.ToString();
-            g.gameObject.GetComponentInChildren<Text>().text = KeyOptions.optionsList[j] + ": " + keyCode;
+            List<string> keys = new List<string>(InputMap.KeyBinds.Keys);
+            //List<KeyCode> values = new List<KeyCode>(InputMap.KeyBinds.Values);
+
+
+            g.gameObject.GetComponentInChildren<Text>().text = keys[j] + ": " + keyCode;
             g.gameObject.AddComponent<DisableWhenClicked>();
             g.gameObject.GetComponent<Button>().onClick.AddListener(StartWait);
             g.gameObject.GetComponent<Button>().onClick.AddListener(g.GetComponent<DisableWhenClicked>().disable);
@@ -156,7 +160,7 @@ public class KeyMapButtons : MonoBehaviour
 
             if (!button.activeInHierarchy)
             {
-                button.SetActive(true);
+                button.SetActive(true); 
                 //settingsprop.SetValue(this, code, null);
                 List<KeyCode> keys = new List<KeyCode>();
                 foreach (var keyBindsValue in InputMap.KeyBinds.Values)
